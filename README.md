@@ -1,6 +1,6 @@
 # guestbook
 
-FIXME
+The first example in "Web Development with Clojure" https://pragprog.com/book/dswdcloj/web-development-with-clojure
 
 ## Prerequisites
 
