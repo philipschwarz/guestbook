@@ -7,7 +7,9 @@
             [compojure.route :as route]
             [guestbook.routes.home :refer [home-routes]]
             [guestbook.routes.auth :refer [auth-routes]]
-            [guestbook.models.db :as db]))
+            [guestbook.models.db :as db]
+            [noir.session :as session]
+            [ring.middleware.session.memory :refer [memory-store]]))
 
 (defn init []
   (println "guestbook is starting")
@@ -25,3 +27,8 @@
   (-> (routes auth-routes home-routes app-routes)
       (handler/site)
       (wrap-base-url)))
+
+(def app
+  (-> (handler/site
+        (routes auth-routes home-routes app-routes))
+      (session/wrap-noir-session {:store (memory-store)})))
